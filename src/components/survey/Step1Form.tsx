@@ -29,7 +29,7 @@ export const Step1Form = () => {
 
   const handleSubmit = async (values: FormValuesStep1) => {
     Cookies.set('Step1', JSON.stringify(values), { expires: 7 })
-    router.push('/step2')
+    router.push('/step/2')
     toast.success("Data Saved!")
   }
 

@@ -67,7 +67,7 @@ export const Step6Form = () => {
           <Spinner isActive={ isSubmitting } />
           <Step6 errors={ errors } touched={ touched } values={ values } handleChange={ handleChange } setFieldValue={ setFieldValue } />
           <StepButtons>
-            <BackButton label="Back" path='/step5' />
+            <BackButton label="Back" path='/step/5' />
             <MainButton type="submit" label="Continue"/>
           </StepButtons>
         </Form>

@@ -30,7 +30,7 @@ export const Step4Form = () => {
 
   const handleSubmit = async (values: FormValuesStep4) => {
     Cookies.set('Step4', JSON.stringify(values), { expires: 7 })
-    router.push('/step5')
+    router.push('/step/5')
     toast.success("Data Saved!")
   }
 
@@ -40,7 +40,7 @@ export const Step4Form = () => {
         <Form>
           <Step4 errors={ errors } touched={ touched } values={ values } handleChange={ handleChange } setFieldValue={ setFieldValue } />
           <StepButtons>
-            <BackButton label="Back" path='/step3' />
+            <BackButton label="Back" path='/step/3' />
             <MainButton type="submit" label="Continue"/>
           </StepButtons>
         </Form>
