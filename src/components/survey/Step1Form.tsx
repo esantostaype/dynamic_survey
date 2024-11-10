@@ -35,7 +35,7 @@ export const Step1Form = () => {
       if (!surveyUUID) {
         const id = uuidv4()
         Cookies.set('surveyUUID', id, { expires: 7 })
-        await fetch('/api/survey', {
+        await fetch('/api', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( { id, ...values } ),
@@ -45,7 +45,7 @@ export const Step1Form = () => {
           id: surveyUUID,
           updates: values,
         }
-        await fetch('/api/survey', {
+        await fetch('/api', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify( surveyData ),

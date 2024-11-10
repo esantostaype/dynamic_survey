@@ -34,7 +34,7 @@ export const Step4Form = () => {
       id: surveyUUID,
       updates: values,
     }
-    await fetch('/api/survey', {
+    await fetch('/api', {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( surveyData ),
