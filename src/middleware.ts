@@ -3,41 +3,45 @@ import { NextRequest, NextResponse } from 'next/server'
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  type RequestCookie = unknown
-  const stepData: Record<string, RequestCookie | undefined> = {
-    '1': request.cookies.get('Step1'),
-    '2': request.cookies.get('Step2'),
-    '3': request.cookies.get('Step3'),
-    '4': request.cookies.get('Step4'),
-    '5': request.cookies.get('Step5'),
-    '6': request.cookies.get('Step6'),
+  if (pathname === '/success') {
+    const surveyUUID = request.cookies.get('surveyUUID')
+    if (!surveyUUID) {
+      return NextResponse.redirect(new URL('/step/1', request.url))
+    }
+    return NextResponse.next()
   }
 
-  // Determinar el paso más alto que tiene data
-  let highestStepWithData = 1 // Por defecto, el paso 1 siempre tiene data
-  for (let i = 2; i <= 6; i++) {
-    if (stepData[i.toString()]) {
-      highestStepWithData = i
-    } else {
-      break
+  if (pathname === '/step/1') {
+    return NextResponse.next()
+  }
+
+  if (pathname.startsWith('/step/')) {
+    const currentStep = parseInt(pathname.split('/step/')[1])
+    
+    if (isNaN(currentStep) || currentStep < 2 || currentStep > 6) {
+      return NextResponse.redirect(new URL('/step/1', request.url))
+    }
+
+    const step1Data = request.cookies.get('Step1')
+    if (!step1Data) {
+      return NextResponse.redirect(new URL('/step/1', request.url))
+    }
+
+    const previousStepData = request.cookies.get(`Step${currentStep - 1}`)
+    
+    if (!previousStepData) {
+      let lastCompletedStep = 1
+      for (let i = currentStep - 1; i >= 2; i--) {
+        const stepData = request.cookies.get(`Step${i}`)
+        if (stepData) {
+          lastCompletedStep = i
+          break
+        }
+      }
+      const redirectStep = lastCompletedStep === 1 ? 2 : lastCompletedStep + 1
+      return NextResponse.redirect(new URL(`/step/${redirectStep}`, request.url))
     }
   }
 
-  // Redirigir desde `/success` al paso más alto completado + 1 si faltan datos en algún paso
-  if (pathname === '/success' && highestStepWithData < 6) {
-    return NextResponse.redirect(new URL(`/step/${highestStepWithData + 1}`, request.url))
-  }
-
-  // Verificar que la ruta es un paso de la encuesta, pero no el primer paso
-  if (pathname.startsWith('/step/') && pathname !== '/step/1') {
-    const step = pathname.split('/step/')[1]
-    const currentStep = parseInt(step)
-
-    // Redirigir al siguiente paso no completado si el usuario intenta acceder a un paso sin completar
-    if (currentStep > highestStepWithData + 1) {
-      return NextResponse.redirect(new URL(`/step/${highestStepWithData + 1}`, request.url))
-    }
-  }
-  
   return NextResponse.next()
 }
