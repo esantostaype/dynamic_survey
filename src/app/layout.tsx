@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import '@fontsource/ibm-plex-sans'
-import '@fontsource/ibm-plex-sans/600.css'
+import '@fontsource/oswald'
 import './globals.css'
 import { Providers } from './providers'
 import Image from 'next/image'

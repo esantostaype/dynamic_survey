@@ -14,6 +14,9 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        oswald: 'var(--font-oswald)'
+      }
     },
   },
   plugins: [],

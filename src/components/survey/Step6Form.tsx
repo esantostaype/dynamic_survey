@@ -30,6 +30,7 @@ export const Step6Form = () => {
 
   const handleSubmit = async (values: FormValuesStep6) => {
     const id = uuidv4()
+    Cookies.set('surveyUUID', id, { expires: 7 })
     const step1Data = Cookies.get('Step1') ? JSON.parse(Cookies.get('Step1')!) : {}
     const step2Data = Cookies.get('Step2') ? JSON.parse(Cookies.get('Step2')!) : {}
     const step3Data = Cookies.get('Step3') ? JSON.parse(Cookies.get('Step3')!) : {}
@@ -56,7 +57,7 @@ export const Step6Form = () => {
     Cookies.remove('Step3')
     Cookies.remove('Step4')
     Cookies.remove('Step5')
-    router.push('/finish')
+    router.push('/success')
   }
 
   return (
