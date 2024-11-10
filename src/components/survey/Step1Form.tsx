@@ -2,7 +2,7 @@
 import { useRouter } from 'next-nprogress-bar'
 import { useEffect, useState } from 'react'
 import { MainButton, Spinner, StepButtons } from '@/components'
-import { Step1 } from '../components'
+import { Step1 } from '@/components'
 import { Formik, Form } from 'formik'
 import { FormValuesStep1 } from '@/interfaces'
 import { FormSchemaStep1 } from '@/schema'
@@ -52,7 +52,7 @@ export const Step1Form = () => {
         })
       }
       Cookies.set('Step1', JSON.stringify(values), { expires: 7 })
-      router.push('/survey/step2')
+      router.push('/step2')
       toast.success("Data Saved!")
     } catch (error) {
       console.error('Error al enviar los datos:', error)

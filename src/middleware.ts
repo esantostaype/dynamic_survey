@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
-  if (pathname.startsWith('/survey/step') && pathname !== '/survey/step1') {
-    const step = pathname.split('/survey/step')[1]
+  if (pathname.startsWith('/step') && pathname !== '/step1') {
+    const step = pathname.split('/step')[1]
     const step2 = request.cookies.get('Step2')
     const step3 = request.cookies.get('Step3')
     const step4 = request.cookies.get('Step4')
@@ -14,18 +14,18 @@ export function middleware(request: NextRequest) {
     const currentData = stepsData[step as '2' | '3' | '4' | '5' | '6']
     const previousStepData = currentStep > 2 ? stepsData[(currentStep - 1).toString() as '2' | '3' | '4' | '5'] : true
     if (!currentData && !previousStepData) {
-      let redirectUrl = '/survey/step1'
+      let redirectUrl = '/step1'
 
       if (step6) {
-        redirectUrl = '/survey/step6'
+        redirectUrl = '/step6'
       } else if (step5) {
-        redirectUrl = '/survey/step5'
+        redirectUrl = '/step5'
       } else if (step4) {
-        redirectUrl = '/survey/step4'
+        redirectUrl = '/step4'
       } else if (step3) {
-        redirectUrl = '/survey/step3'
+        redirectUrl = '/step3'
       } else if (step2) {
-        redirectUrl = '/survey/step2'
+        redirectUrl = '/step2'
       }
 
       if (pathname !== redirectUrl) {

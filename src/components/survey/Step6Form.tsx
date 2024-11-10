@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next-nprogress-bar'
 import { BackButton, MainButton, Spinner, StepButtons } from '@/components'
-import { Step6 } from '../components'
+import { Step6 } from '@/components'
 import { Formik, Form } from 'formik'
 import { FormValuesStep6 } from '@/interfaces'
 import { FormSchemaStep6 } from '@/schema'
@@ -51,7 +51,7 @@ export const Step6Form = () => {
           <Spinner isActive={ isSubmitting } />
           <Step6 errors={ errors } touched={ touched } values={ values } handleChange={ handleChange } setFieldValue={ setFieldValue } />
           <StepButtons>
-            <BackButton label="Back" path='/survey/step5' />
+            <BackButton label="Back" path='/step5' />
             <MainButton type="submit" label="Continue"/>
           </StepButtons>
         </Form>

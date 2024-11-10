@@ -1,4 +1,4 @@
-import { Step3Form } from '../components/Step3Form'
+import { Step3Form } from '@/components'
 
 export default function Step3Page() {
   return (

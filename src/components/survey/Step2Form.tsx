@@ -1,34 +1,34 @@
 'use client'
 import { useRouter } from 'next-nprogress-bar'
 import { BackButton, MainButton, Spinner, StepButtons } from '@/components'
-import { Step4 } from '../components'
+import { Step2 } from '@/components'
 import { Formik, Form } from 'formik'
-import { FormValuesStep4 } from '@/interfaces'
-import { FormSchemaStep4 } from '@/schema'
+import { FormValuesStep2 } from '@/interfaces'
+import { FormSchemaStep2 } from '@/schema'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
 
-export const Step4Form = () => {
+export const Step2Form = () => {
 
   const router = useRouter()
 
-  const defaultInitialValues: FormValuesStep4 = {
-    q15: '', q16: [], q16Other: '', q17: '', q17Explain: '', q18: '', q19: '', q19Explain: ''
+  const defaultInitialValues: FormValuesStep2 = {
+    q4: '', q5: '', q6: [], q6Other: '', q7: '', q8: ''
   }
 
-  const [initialValues, setInitialValues] = useState<FormValuesStep4>(defaultInitialValues)
+  const [initialValues, setInitialValues] = useState<FormValuesStep2>(defaultInitialValues)
 
   useEffect(() => {
-    const savedValues = Cookies.get('Step4')
+    const savedValues = Cookies.get('Step2')
     if (savedValues) {
-      const parsedValues = JSON.parse(savedValues) as FormValuesStep4
+      const parsedValues = JSON.parse(savedValues) as FormValuesStep2
       setInitialValues(parsedValues)
     }
   }, [])
 
-  const handleSubmit = async (values: FormValuesStep4) => {
+  const handleSubmit = async (values: FormValuesStep2) => {
     const surveyUUID = Cookies.get('surveyUUID')
     const surveyData = {
       id: surveyUUID,
@@ -39,19 +39,19 @@ export const Step4Form = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( surveyData ),
     })
-    Cookies.set('Step4', JSON.stringify(values), { expires: 7 })
-    router.push('/survey/step5')
+    Cookies.set('Step2', JSON.stringify(values), { expires: 7 })
+    router.push('/step3')
     toast.success("Data Saved!")
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FormSchemaStep4} enableReinitialize>
+    <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FormSchemaStep2} enableReinitialize>
       {({ errors, touched, values, handleChange, setFieldValue, isSubmitting }) => (
-        <Form>          
+        <Form>
           <Spinner isActive={ isSubmitting } />
-          <Step4 errors={ errors } touched={ touched } values={ values } handleChange={ handleChange } setFieldValue={ setFieldValue } />
+          <Step2 errors={ errors } touched={ touched } values={ values } handleChange={ handleChange } setFieldValue={ setFieldValue } />
           <StepButtons>
-            <BackButton label="Back" path='/survey/step3' />
+            <BackButton label="Back" path='/step1' />
             <MainButton type="submit" label="Continue"/>
           </StepButtons>
         </Form>
