@@ -1,13 +1,12 @@
 'use client'
 import { useRouter } from 'next-nprogress-bar'
 import { useEffect, useState } from 'react'
-import { MainButton, Spinner, StepButtons } from '@/components'
+import { MainButton, StepButtons } from '@/components'
 import { Step1 } from '@/components'
 import { Formik, Form } from 'formik'
 import { FormValuesStep1 } from '@/interfaces'
 import { FormSchemaStep1 } from '@/schema'
 import Cookies from 'js-cookie'
-import { v4 as uuidv4 } from 'uuid'
 import { toast } from 'react-toastify'
 
 export const Step1Form = () => {
@@ -29,34 +28,9 @@ export const Step1Form = () => {
   }, [])
 
   const handleSubmit = async (values: FormValuesStep1) => {
-    try {
-      const surveyUUID = Cookies.get('surveyUUID')
-
-      if (!surveyUUID) {
-        const id = uuidv4()
-        Cookies.set('surveyUUID', id, { expires: 7 })
-        await fetch('/api', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify( { id, ...values } ),
-        })
-      } else {
-        const surveyData = {
-          id: surveyUUID,
-          updates: values,
-        }
-        await fetch('/api', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify( surveyData ),
-        })
-      }
-      Cookies.set('Step1', JSON.stringify(values), { expires: 7 })
-      router.push('/step2')
-      toast.success("Data Saved!")
-    } catch (error) {
-      console.error('Error al enviar los datos:', error)
-    }
+    Cookies.set('Step1', JSON.stringify(values), { expires: 7 })
+    router.push('/step2')
+    toast.success("Data Saved!")
   }
 
   return (
@@ -66,9 +40,8 @@ export const Step1Form = () => {
       validationSchema={FormSchemaStep1}
       enableReinitialize
     >
-      {({ errors, touched, values, handleChange, setFieldValue, isSubmitting }) => (
+      {({ errors, touched, values, handleChange, setFieldValue }) => (
         <Form>
-          <Spinner isActive={ isSubmitting } />
           <Step1
             errors={errors}
             touched={touched}

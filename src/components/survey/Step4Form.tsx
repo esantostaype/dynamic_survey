@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from 'next-nprogress-bar'
-import { BackButton, MainButton, Spinner, StepButtons } from '@/components'
+import { BackButton, MainButton, StepButtons } from '@/components'
 import { Step4 } from '@/components'
 import { Formik, Form } from 'formik'
 import { FormValuesStep4 } from '@/interfaces'
@@ -29,16 +29,6 @@ export const Step4Form = () => {
   }, [])
 
   const handleSubmit = async (values: FormValuesStep4) => {
-    const surveyUUID = Cookies.get('surveyUUID')
-    const surveyData = {
-      id: surveyUUID,
-      updates: values,
-    }
-    await fetch('/api', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify( surveyData ),
-    })
     Cookies.set('Step4', JSON.stringify(values), { expires: 7 })
     router.push('/step5')
     toast.success("Data Saved!")
@@ -46,9 +36,8 @@ export const Step4Form = () => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={handleSubmit} validationSchema={FormSchemaStep4} enableReinitialize>
-      {({ errors, touched, values, handleChange, setFieldValue, isSubmitting }) => (
-        <Form>          
-          <Spinner isActive={ isSubmitting } />
+      {({ errors, touched, values, handleChange, setFieldValue }) => (
+        <Form>
           <Step4 errors={ errors } touched={ touched } values={ values } handleChange={ handleChange } setFieldValue={ setFieldValue } />
           <StepButtons>
             <BackButton label="Back" path='/step3' />

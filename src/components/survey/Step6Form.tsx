@@ -7,7 +7,7 @@ import { FormValuesStep6 } from '@/interfaces'
 import { FormSchemaStep6 } from '@/schema'
 import Cookies from 'js-cookie'
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+import { v4 as uuidv4 } from 'uuid'
 
 
 export const Step6Form = () => {
@@ -29,19 +29,34 @@ export const Step6Form = () => {
   }, [])
 
   const handleSubmit = async (values: FormValuesStep6) => {
-    const surveyUUID = Cookies.get('surveyUUID')
-    const surveyData = {
-      id: surveyUUID,
-      updates: values,
+    const id = uuidv4()
+    const step1Data = Cookies.get('Step1') ? JSON.parse(Cookies.get('Step1')!) : {}
+    const step2Data = Cookies.get('Step2') ? JSON.parse(Cookies.get('Step2')!) : {}
+    const step3Data = Cookies.get('Step3') ? JSON.parse(Cookies.get('Step3')!) : {}
+    const step4Data = Cookies.get('Step4') ? JSON.parse(Cookies.get('Step4')!) : {}
+    const step5Data = Cookies.get('Step5') ? JSON.parse(Cookies.get('Step5')!) : {}
+
+    const allData = {
+      id,
+      ...step1Data,
+      ...step2Data,
+      ...step3Data,
+      ...step4Data,
+      ...step5Data,
+      ...values
     }
+
     await fetch('/api', {
-      method: 'PUT',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify( surveyData ),
+      body: JSON.stringify( allData )
     })
-    Cookies.set('Step6', JSON.stringify(values), { expires: 7 })
-    router.push('/survey/finish')
-    toast.success("Data Saved!")
+    Cookies.remove('Step1')
+    Cookies.remove('Step2')
+    Cookies.remove('Step3')
+    Cookies.remove('Step4')
+    Cookies.remove('Step5')
+    router.push('/finish')
   }
 
   return (
