@@ -6,7 +6,10 @@ import { Providers } from './providers'
 import Image from 'next/image'
 
 export const metadata: Metadata = {
-  title: "Survey to Understand the Digital Needs of Businesses"
+  title: "Survey to Understand the Digital Needs of Businesses",
+  icons: {
+    icon: '/images/iso.svg'
+  }
 }
 
 export default function RootLayout({ children } : Readonly<{ children: React.ReactNode }>) {
