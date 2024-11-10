@@ -1,5 +1,5 @@
 'use client'
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next-nprogress-bar'
 import ArrowForwardRoundedIcon from '@mui/icons-material/ArrowForwardRounded'
 
 interface Props {

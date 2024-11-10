@@ -3,7 +3,7 @@ interface Props {
   width?: string
 }
 
-export const Iso = ({ width="32px", fill = "black" }: Props) => {
+export const Iso = ({ width="32px", fill = "foreground" }: Props) => {
   return (
     <svg viewBox="0 0 27 32" width={ width } className={`fill-${ fill }`}>
       <path d="M10.7,9.6c0,.6-.5,1.1-1.1,1.1H1.1c-.6,0-1.1.5-1.1,1.1v8.6c0,.6.5,1.1,1.1,1.1,5.3,0,9.6-4.3,9.6-9.6h0c0-.6.6-1,1.1-.9,2.4.4,4.2,2.7,4.2,5.2s-1.8,4 8-4.3,5.2c-.6.1-1.1.6-1.1,1.3v8.2c0,.7.6,1.3,1.4,1.3,8.2-.7,14.6-7.6,14.6-16S20.2.7,12,0c-.7,0-1.4.5-1.4,1.3v8.3h0Z"/>
@@ -19,10 +19,18 @@ export const Check = ({ width="32px"}: Props) => {
   )
 }
 
-export const Arrow = ({ width="32px", fill = "black" }: Props) => {
+export const Arrow = ({ width="32px", fill = "foreground" }: Props) => {
   return (
     <svg viewBox="0 0 32 32" width={ width } className={`fill-${ fill }`}>
       <path d="M32,16h0c0-1.2-.5-2.4-1.3-3.2L20.8,3c-.9-.9-2.3-.9-3.2,0-.9.9-.9,2.3,0,3.2,0,0,0,0,0,0l7.5,7.5H2.3c-1.3,0-2.3,1-2.3,2.3s1,2.3,2.3,2.3h22.9l-7.5,7.5c-.9.9-.9,2.3,0,3.2.9.9,2.3.9,3.2,0l9.8-9.8c.9-.9,1.3-2,1.3-3.2Z"/>
+    </svg>
+  )
+}
+
+export const Home = ({ width="32px"}: Props) => {
+  return (
+    <svg viewBox="0 0 32 32" width={ width } className={`fill-foreground`}>
+      <path d="M30.8,12.1L20.7,2c-2.6-2.6-6.8-2.6-9.4,0L1.2,12.1C.4,12.8,0,13.8,0,14.9v13.1C0,30.2,1.8,32,4,32h24c2.2,0,4-1.8,4-4v-13.1c0-1.1-.4-2.1-1.2-2.8ZM20,29.3h-8v-5.2c0-2.2,1.8-4,4-4s4,1.8,4,4v5.2ZM29.3,28c0,.7-.6,1.3-1.3,1.3h-5.3v-5.2c0-3.7-3-6.7-6.7-6.7s-6.7,3-6.7,6.7v5.2h-5.3c-.7,0-1.3-.6-1.3-1.3v-13.1c0-.4.1-.7.4-.9L13.2,3.8c1.6-1.6,4.1-1.6,5.7,0l10.1,10.1c.2.2.4.6.4.9v13.1Z"/>
     </svg>
   )
 }
