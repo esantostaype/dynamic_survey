@@ -19,7 +19,7 @@ export const Steps = () => {
               ?
               <Link href={ step.path } className="flex items-start gap-3 relative hover:text-accent1">
                 <span
-                  className={`-ml-[calc(1.25rem+2px)] flex-[0_0_2.5rem] flex items-center justify-center size-10 rounded-full ${ isActive ? "bg-black border border-accent1 text-accent1" : "bg-accent1 text-black" }`}
+                  className={`-ml-[calc(1.25rem+2px)] flex-[0_0_2.5rem] flex items-center justify-center size-10 rounded-full ${ isActive ? "bg-background border border-accent1 text-accent1" : "bg-accent1 text-background" }`}
                 >
                   {
                     isActive ? step.icon : <CheckRoundedIcon />
@@ -37,7 +37,7 @@ export const Steps = () => {
               <div className="flex items-start gap-3">
                 <span
                   className={`-ml-[calc(1.25rem+2px)] flex-[0_0_2.5rem] flex items-center justify-center size-10 rounded-full ${
-                    isActive ? 'bg-black text-accent1 border border-accent1' : 'bg-gray-800'
+                    isActive ? 'bg-background text-accent1 border border-accent1' : 'bg-gray-200 dark:bg-gray-800'
                   }`}
                 >
                   {step.icon}

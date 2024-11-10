@@ -12,7 +12,7 @@ export const MainButtonLink = ({ label, path }: Props) => {
   return (
       <button
         onClick={() => router.push(`${ path }`)}
-        className='flex items-center gap-2 md:text-lg text-black py-3 px-8 uppercase group rounded-[4rem] font-bold bg-gradient-to-r to-accent1 from-accent2'
+        className='flex items-center gap-2 md:text-lg text-background py-3 px-8 uppercase group rounded-[4rem] font-bold bg-gradient-to-r to-accent1 from-accent2'
       >
         { label }
         <div className='relative group-hover:ml-2 group-hover:-mr-2 transition-all'>
