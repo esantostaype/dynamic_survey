@@ -5,8 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --color-accent1: #00e260;
-  --color-accent2: #00e2d6;
+  --color-accent1: #3CDC00;
+  --color-accent2: #00DCDC;
   --font-oswald: "Oswald";
   scrollbar-gutter: stable;
 }
@@ -15,8 +15,8 @@
   :root {
     --background: #000018;
     --foreground: #ededed;
-    --color-accent1: #1DFF7D;
-    --color-accent2: #00FFF2;
+    --color-accent1: #3CFF00;
+    --color-accent2: #00FFFF;
   }
 }
 
